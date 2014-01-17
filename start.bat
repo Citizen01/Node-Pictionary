@@ -1,0 +1,1 @@
+cmd /K nodemon -e js,html,css app.js

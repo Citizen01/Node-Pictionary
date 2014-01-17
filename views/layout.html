@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png"> -->
+
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/style.css" rel="stylesheet">
+</head>
+
+<body>
+	<!-- Navigation header -->
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="wrapper">
+
+		  <div class="navbar-header">
+		    <a class="navbar-brand" href="/">Pictionary</a>
+		  </div>
+		  <!-- Links on the left -->
+	  	<ul class="nav navbar-nav">
+	      <li class="active"><a href="/">Home</a></li>
+	      <li><a href="/ladder">Ladder</a></li>
+	    </ul>
+	    <!-- Links on the right -->
+	    <ul class="nav navbar-nav navbar-right">
+	      
+	      <li><a href="/login">Login</a></li>
+	      <li><a href="/register">Register</a></li>
+	      
+	      <li><a href="/rooms">Rooms</a></li>
+	      <li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="/profile">My profile</a></li>
+	          <li class="divider"></li>
+	          <li><a href="/logout">Log out</a></li>
+	        </ul>
+	      </li>
+	    </ul>
+
+		  <div class="clearfix"></div>
+	  </div>
+	</nav>
+
+	<!-- Wrap all page content here -->
+	<div id="content">
+	    <!-- Begin page content -->
+	    <div class="wrapper">
+	        {% block body %}{% endblock %}
+	    </div>
+	</div>
+
+	<footer>
+	    <div class="wrapper">
+	    </div>
+	</footer>
+
+	<script src="/javascripts/bootstrap-without-jquery.min.js"></script>
+</body>
+</html>
