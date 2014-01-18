@@ -1,8 +1,19 @@
 var mongoose = require('./getMongoose.js').mongoose,
+	languages = "english french spanish german".split(' '),
 	PlayerSchema = mongoose.Schema({
-		id : Number,
-		nickname : String,
-		password : String
+		nickname: {
+			type: String,
+			required: true,
+			unique: true
+		},
+		password: {
+			type: String,
+			unique: true
+		},
+		language: {
+			type: String,
+			enum: languages,
+		}
 	}),
 
 	PlayerModel = mongoose.model('Player', PlayerSchema);

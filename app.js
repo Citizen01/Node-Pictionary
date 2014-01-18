@@ -4,7 +4,7 @@
  */
 
 var express = require('express'),
-	database = require('./mysql/mysql'),
+	flash = require('connect-flash'),
 	user = require('./routes/user'),
 	http = require('http'),
 	path = require('path'),
@@ -24,6 +24,17 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.cookieParser('odltst%yz@t5h)d3*vzm)27smktq'));
+app.use(express.session());
+app.use(flash());
+
+app.use(function(req, res, next) {
+    res.locals.messages = function() { return req.flash() };
+    // res.locals.user = req.user;
+    // res.locals.body = req.body;
+    next();
+});
+
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
