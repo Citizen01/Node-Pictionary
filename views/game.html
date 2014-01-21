@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<div id="game-zone">
+		<div id="side-zone" >
+			<div id="time-zone">
+				<span>2:30</span>
+			</div>
+			<div id="score-zone" class="top-border">
+				<p>score-zone</p>
+			</div>
+			<div id="chat-zone" class="top-border">
+				<p>chat-zone</p>
+			</div>
+		</div>
+		<div id="drawing-zone">
+			<div id="tools">
+				<div class="tool">1</div>
+				<div class="tool">2</div>
+				<div class="tool">3</div>
+				<div class="tool">4</div>
+				<div class="tool">5</div>
+				<div class="tool">6</div>
+				<div class="tool">7</div>
+			</div>
+			<p>drawing-zone</p>
+		</div>
+		<div class="clearfix"></div>
+	<script src="/javascripts/game.js"></script>
+{% endblock %}

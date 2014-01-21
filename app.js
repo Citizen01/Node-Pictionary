@@ -5,14 +5,14 @@
 
 var express = require('express'),
 	flash = require('connect-flash'),
-	user = require('./routes/user'),
 	http = require('http'),
 	path = require('path'),
 	swig = require('swig'),
 	defaultRoutes = require('./routes/default'),
-	userRoutes = require('./routes/user');
+	userRoutes = require('./routes/user'),
+	gameRoutes = require('./routes/game');
 
- app = express();
+var app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -56,8 +56,15 @@ app.post('/login', defaultRoutes.doLogin);
 
 app.get('/logout', defaultRoutes.logout);
 
-app.get('/profile', user.uprofile);
-app.post('/profile', user.doUprofile);
+app.get('/profile', userRoutes.uprofile);
+app.post('/profile', userRoutes.doUprofile);
+
+app.get('/rooms', gameRoutes.rooms);
+app.post('/rooms', gameRoutes.doRooms);
+
+app.get('/play', gameRoutes.game);
+app.post('/play', gameRoutes.doGame);
+
 /*--------*/
 
 /*---- Server instance ----*/
