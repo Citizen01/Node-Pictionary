@@ -7,23 +7,55 @@
 				<span>2:30</span>
 			</div>
 			<div id="score-zone" class="top-border">
-				<p>score-zone</p>
+				<ul id="playerlist">
+					<li><span>tehCivilian:</span>3 points</li>
+					<li class="drawer"><span>tehCivilian:</span>3 points</li>
+					<li><span>tehCivilian:</span>3 points</li>
+					<li><span>tehCivilian:</span>3 points</li>
+				</ul>
 			</div>
 			<div id="chat-zone" class="top-border">
-				<p>chat-zone</p>
+				<ul>
+					<li><span>tehCivilian:</span>Putin mais tu dessines comme une merde sérieux !</li>
+					<li><span>tehCivilian:</span>Ferme ta gueule, tu t'es pas vu déssiner ! lol</li>
+					<li><span>tehCivilian:</span>lol</li>
+					<li><span>tehCivilian:</span>lol</li>
+				</ul>
+				<div id="chat-input">
+						<input class="form-control" type="text">
+						<button type="submit" class="btn btn-default">Send</button>
+				</div>
 			</div>
 		</div>
 		<div id="drawing-zone">
-			<div id="tools">
-				<div class="tool">1</div>
-				<div class="tool">2</div>
-				<div class="tool">3</div>
-				<div class="tool">4</div>
-				<div class="tool">5</div>
-				<div class="tool">6</div>
-				<div class="tool">7</div>
+			<div id="drawing-header">
+				<ul id="tools">
+					<li class="button pencil selected"></li>
+					<li class="button eraser"></li>
+				</ul>
+				<ul id="sizes">
+					<li class="button s-small selected"></li>
+					<li class="button s-medium"></li>
+					<li class="button s-large"></li>
+				</ul>
+				<ul id="colors">
+					<!-- 1ère ligne -->
+					<li class="color black"></li>
+					<li class="color grey"></li>
+					<li class="color red selected"></li>
+					<li class="color brown"></li>
+					<li class="color skin"></li>
+					<li class="color orange"></li>
+					<!-- 2ème ligne -->
+					<li class="color white"></li>
+					<li class="color yellow"></li>
+					<li class="color green"></li>
+					<li class="color blue"></li>
+					<li class="color purple"></li>
+					<li class="color pink"></li>
+				</ul>
 			</div>
-			<p>drawing-zone</p>
+			<canvas id="mycanvas"></canvas>
 		</div>
 		<div class="clearfix"></div>
 	<script src="/javascripts/game.js"></script>

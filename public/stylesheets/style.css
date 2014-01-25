@@ -7,6 +7,10 @@ a {
   color: #00B7FF;
 }
 
+ul li{
+	list-style-type: none;
+}
+
 .wrapper {
 	width: 950px;
 	margin: auto;
@@ -65,9 +69,16 @@ a.btn {
 	margin:	auto;
 }
 
+#game-zone ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+/*** Left side***/
 #side-zone {
 	width: 300px;
-	height: 600px;
+	height: 556px;
 	background-color: #eeeeee;
 	border-radius: 5px;
 	box-shadow: 0px 0px 5px #000000;
@@ -96,36 +107,188 @@ a.btn {
 	display: block;
 }
 
-#score-zone {
-	height:	150px;
+div#score-zone {
+	height:	100px;
+	padding: 10px;
+}
+
+#score-zone ul li span{
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+#score-zone ul li.drawer{
+	background: url("/images/drawer_icon.png") no-repeat right;
 }
 
 #chat-zone {
 	height:	350px;
+	padding: 10px;
 }
 
+#chat-zone ul {
+	height: 300px;
+	margin-bottom: 7px;
+	padding: 3px;
+	overflow-y: auto;
+	display: block;
+	border-radius: 5px;
+	box-shadow: inset 0px 0px 5px #000000;
+}
+
+#chat-zone ul li {
+	display: block;
+	font-size: 14px;
+	padding: 7px;
+	/*border-top: 1px solid grey;*/
+}
+
+#chat-zone ul li:nth-child(odd) {
+	background-color: #d5d5d5;
+}
+
+#chat-zone ul li span {
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+div#chat-input {
+	padding: 0px;
+}
+
+#chat-input .form-control {
+	width: 230px;
+	float: left;
+}
+
+/*** Right side***/
+
 #drawing-zone {
-	width:	550px;
-	height:	550px;
-	margin: 25px 0px;
+	width:	560px;
+	height:	556px;
 	box-shadow: 0px 0px 7px #000000;
 	float: right;
 }
 
-#tools {
+#drawing-header {
 	height: 56px;
+	margin: 0px;
+	padding: 7px;
 	background-color: #eeeeee;
 	border-bottom: 1px solid black;
 }
 
-.tool {
+#drawing-header ul li {
+	display: inline-block;
+}
+
+#drawing-header .selected{
+	box-shadow: 0px 0px 10px #00CCFF !important;
+}
+
+li.button {
 	width: 40px;
 	height: 40px;
-	margin: 7px;
-	float: left;
-	display: block;
+	margin: 0px 4px;
+	padding: 5px;
 	border-radius: 4px;
 	box-shadow: 0px 0px 3px #000000;
 	background-color: wheat;
-	padding: 5px;
+	cursor: pointer;
+}
+
+#tools {
+	float: left;
+	display: block;
+}
+
+#sizes {
+	float: left;
+    width: 290px;
+    text-align: center;
+}
+
+.s-small {
+	background-image: url('/images/size-small.png');
+}
+.s-medium {
+	background-image: url('/images/size-medium.png');
+}
+.s-large {
+	background-image: url('/images/size-large.png');
+}
+
+#colors {
+	width: 150px;
+	float: right;
+}
+
+#colors .color {
+	width: 20px;
+	height: 20px;
+	border-radius: 4px;
+	box-shadow: 0px 0px 3px #000000;
+	cursor: pointer;
+}
+
+#colors .white {
+	background-color: #ffffff;
+}
+#colors .black {
+	background-color: #000000;
+}
+#colors .red {
+	background-color: #ff0000;
+}
+#colors .orange {
+	background-color: #ff6a00;
+}
+#colors .yellow {
+	background-color: #ffd800;
+}
+#colors .green {
+	background-color: #00ff00;
+}
+#colors .blue {
+	background-color: #0000ff;
+}
+#colors .purple {
+	background-color: #0094ff;
+}
+#colors .pink {
+	background-color: #ff66cc;
+}
+#colors .brown {
+	background-color: #993300;
+}
+#colors .grey {
+	background-color: #808080;
+}
+#colors .skin {
+	background-color: #eebb99;
+}
+
+ul#drawing-header>:first-child, ul#drawing-header>:last-child {
+	margin-left: 0px;
+}
+
+.pencil {
+	background-image: url("/images/tool-pen.png");
+	background-repeat: no-repeat;
+}
+
+.brush {
+	background-image: url("/images/tool-brush.png");
+	background-repeat: no-repeat;
+}
+
+.eraser {
+	background-image: url("/images/tool-eraser.png");
+	background-repeat: no-repeat;
+}
+
+#mycanvas {
+	width: 560px;
+	height: 500px;
+	/*border: 1px solid red;*/
 }
