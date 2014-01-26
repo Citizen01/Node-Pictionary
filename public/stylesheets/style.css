@@ -97,7 +97,7 @@ a.btn {
 	height:	100px;
 }
 
-#time-zone span{
+span#time{
 	line-height: 1em;
 	color: #c2c2c2;
 	font-weight:bold;
@@ -140,11 +140,7 @@ div#score-zone {
 	display: block;
 	font-size: 14px;
 	padding: 7px;
-	/*border-top: 1px solid grey;*/
-}
-
-#chat-zone ul li:nth-child(odd) {
-	background-color: #d5d5d5;
+	border-bottom: 1px dashed #d2d2d2;
 }
 
 #chat-zone ul li span {
@@ -182,20 +178,6 @@ div#chat-input {
 	display: inline-block;
 }
 
-#drawing-header .selected{
-	box-shadow: 0px 0px 10px #00CCFF !important;
-}
-
-li.button {
-	width: 40px;
-	height: 40px;
-	margin: 0px 4px;
-	padding: 5px;
-	border-radius: 4px;
-	box-shadow: 0px 0px 3px #000000;
-	background-color: wheat;
-	cursor: pointer;
-}
 
 #tools {
 	float: left;
@@ -208,13 +190,28 @@ li.button {
     text-align: center;
 }
 
-.s-small {
+#tools li, #sizes li{
+	width: 40px;
+	height: 40px;
+	margin: 0px 4px;
+	padding: 5px;
+	border-radius: 4px;
+	box-shadow: 0px 0px 3px #000000;
+	background-color: wheat;
+	cursor: pointer;
+}
+
+#drawing-header .selected{
+	box-shadow: 0px 0px 10px #00CCFF !important;
+}
+
+#s-small {
 	background-image: url('/images/size-small.png');
 }
-.s-medium {
+#s-medium {
 	background-image: url('/images/size-medium.png');
 }
-.s-large {
+#s-large {
 	background-image: url('/images/size-large.png');
 }
 
@@ -223,7 +220,7 @@ li.button {
 	float: right;
 }
 
-#colors .color {
+#colors li {
 	width: 20px;
 	height: 20px;
 	border-radius: 4px;
@@ -231,40 +228,40 @@ li.button {
 	cursor: pointer;
 }
 
-#colors .white {
+#colors #white {
 	background-color: #ffffff;
 }
-#colors .black {
+#colors #black {
 	background-color: #000000;
 }
-#colors .red {
+#colors #red {
 	background-color: #ff0000;
 }
-#colors .orange {
+#colors #orange {
 	background-color: #ff6a00;
 }
-#colors .yellow {
+#colors #yellow {
 	background-color: #ffd800;
 }
-#colors .green {
+#colors #green {
 	background-color: #00ff00;
 }
-#colors .blue {
+#colors #blue {
 	background-color: #0000ff;
 }
-#colors .purple {
-	background-color: #0094ff;
+#colors #purple {
+	background-color: #3c0dcf;
 }
-#colors .pink {
+#colors #pink {
 	background-color: #ff66cc;
 }
-#colors .brown {
+#colors #brown {
 	background-color: #993300;
 }
-#colors .grey {
+#colors #grey {
 	background-color: #808080;
 }
-#colors .skin {
+#colors #skin {
 	background-color: #eebb99;
 }
 
@@ -272,23 +269,17 @@ ul#drawing-header>:first-child, ul#drawing-header>:last-child {
 	margin-left: 0px;
 }
 
-.pencil {
+#pencil {
 	background-image: url("/images/tool-pen.png");
 	background-repeat: no-repeat;
 }
 
-.brush {
+#brush {
 	background-image: url("/images/tool-brush.png");
 	background-repeat: no-repeat;
 }
 
-.eraser {
+#eraser {
 	background-image: url("/images/tool-eraser.png");
 	background-repeat: no-repeat;
-}
-
-#mycanvas {
-	width: 560px;
-	height: 500px;
-	/*border: 1px solid red;*/
 }

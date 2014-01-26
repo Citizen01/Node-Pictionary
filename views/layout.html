@@ -3,8 +3,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <!-- <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png"> -->
 
     <title>{% block title %}{{ title }}{% endblock %}</title>
@@ -17,6 +15,8 @@
 </head>
 
 <body>
+	<!-- {% set user = req.session.user %} -->
+
 	<!-- Navigation header -->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="wrapper">
@@ -31,19 +31,24 @@
 	    </ul>
 	    <!-- Links on the right -->
 	    <ul class="nav navbar-nav navbar-right">
-	      
-	      <li><a href="/login">Login</a></li>
-	      <li><a href="/register">Register</a></li>
-	      
+	      {% if user %}
 	      <li><a href="/rooms">Rooms</a></li>
+	      <li><a href="/profile">My profile</a></li>
+	      <li><a href="/logout">Log out</a></li>
+	      <!--
 	      <li class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">tehCivilian <b class="caret"></b></a>
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.nickname}} <b class="caret"></b></a>
 	        <ul class="dropdown-menu">
 	          <li><a href="/profile">My profile</a></li>
 	          <li class="divider"></li>
 	          <li><a href="/logout">Log out</a></li>
 	        </ul>
 	      </li>
+	      -->
+	      {% else %}
+	      <li><a href="/login">Login</a></li>
+	      <li><a href="/register">Register</a></li>
+	      {% endif %}
 	    </ul>
 
 		  <div class="clearfix"></div>

@@ -30,8 +30,8 @@ app.use(flash());
 
 app.use(function(req, res, next) {
     res.locals.messages = function() { return req.flash() };
-    // res.locals.user = req.user;
-    // res.locals.body = req.body;
+    res.locals.user = req.session.user;
+    res.locals.req = req;
     next();
 });
 

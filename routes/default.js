@@ -5,22 +5,23 @@ module.exports = {
 	/*
 	 * GET index page.
 	 */
-	index: function(req, res){
+	index: function(req, res) {
 	  	res.render('index', { title: 'Index' });
 	},
 
 	/*
 	 * GET register page.
 	 */
-	register: function(req, res){
+	register: function(req, res) {
+		if (req.session.user) {return res.redirect('/rooms');}
 	  	res.render('register', { title: 'Register' });
 	},
 
 	/*
 	 * POST register page.
 	 */
-	doRegister: function(req, res){
-
+	doRegister: function(req, res) {
+		if (req.session.user) {return res.redirect('/rooms');}
 		var nick = req.body.username,
 			pass = req.body.password,
 			pass2 = req.body.password2,
@@ -61,8 +62,8 @@ module.exports = {
 	            'language': lang
 	        });
 
-	        player.save(function(err, user){
-	            if (err){
+	        player.save(function(err, user) {
+	            if (err) {
 	            	console.log(err);
 	            	req.flash('error', 'This nickname is already taken !');
 	            	return res.redirect('/register');
@@ -78,30 +79,44 @@ module.exports = {
 	/*
 	 * GET login page.
 	 */
-	login: function(req, res){
+	login: function(req, res) {
+		if (req.session.user) {return res.redirect('/rooms');}
 	  	res.render('login', { title: 'Login' });
 	},
 
 	/*
 	 * POST login page.
 	 */
-	doLogin: function(req, res){
-	  
-	  	//Redirect ou render ac les erreurs
+	doLogin: function(req, res) {
+		if (req.session.user) {return res.redirect('/rooms');}
+		var username = req.body.username,
+			pass = crypto.createHash('sha256').update(req.body.password).digest('hex');
+	  	Player.findOne({nickname: req.body.username, password: pass})
+	  		.exec( function(err, user) {
+	  			if (err || !user) {
+	  				console.log(err);
+	            	req.flash('error', 'Wrong username or password !');
+	            	return res.redirect('/login');
+	  			}
+	  			user.password = ""; //security issue
+	  			req.session.user = user;
+	  			req.flash('success', 'You have been successfully logged in !');
+	  			res.redirect('/rooms');
+	  		});
 	},
 
 	/*
 	 * GET logout page.
 	 */
-	logout: function(req, res){
-
-	  	//Redirect
+	logout: function(req, res) {
+		req.session.destroy();
+		res.redirect('/')
 	},
 
 	/*
 	 * GET ladder page.
 	 */
-	ladder: function(req, res){
+	ladder: function(req, res) {
 	  	res.render('index', { title: 'Ladder' });
 	}
 }
