@@ -6,7 +6,11 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.4.7",
-    "jade": "*"
+    "express": "~3.4.7",
+    "jade": "*",
+    "connect-flash": "~0.1.1",
+    "swig": "~1.3.0",
+    "mongodb": "~1.3.23",
+    "mongoose": "~3.8.5"
   }
 }
