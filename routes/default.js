@@ -54,7 +54,6 @@ module.exports = {
 
 		if (errors == 0) {
 			pass = crypto.createHash('sha256').update(pass).digest('hex');
-			console.log('The encrypted pass is : ' + pass);
 			//Register the guy
 			var player = new Player({
 	            'nickname': nick,
@@ -68,7 +67,6 @@ module.exports = {
 	            	req.flash('error', 'This nickname is already taken !');
 	            	return res.redirect('/register');
 	            }
-                console.log('Player ' + player.nickname + ' registered !');
                 res.redirect('/');
 	        })
 		} else {
@@ -117,6 +115,7 @@ module.exports = {
 	 * GET ladder page.
 	 */
 	ladder: function(req, res) {
-	  	res.render('index', { title: 'Ladder' });
+		res.redirect('/');
+	  	// res.render('ladder', { title: 'Ladder' });
 	}
 }

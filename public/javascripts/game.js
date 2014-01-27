@@ -1,20 +1,25 @@
-
+// var localuser = {isDrawer: true};
 
 /*** timer-zone ***/
-var time=150, mins, secs,
-	spanTime = document.getElementById('time');
+var defaultTime = 150, time = defaultTime, mins, secs,
+	spanTime = document.getElementById('time'),
+	statuses = { waiting: 0, playing: 1, midtime: 3}
+	status = statuses.waiting;
+
+//   /play/3 => 3
+var roomid = parseInt(location.pathname.match(/\/play\/(.*)/)[1]);
 
 /* countdown */
-setInterval(function(){
+function resetCoundown() { time=defaultTime; }
+setInterval( function() {
+	// if (status != statuses.playing) { return ;}
 	mins = Math.floor(time / 60).toString();
 	secs = (time - mins * 60).toString();
 	if (secs.length < 2) { secs = "0" + secs; }
 	spanTime.innerHTML = mins + ":" + secs;
 	if (time > 0) { time--; } else { time = 0; }
 }, 1000)
-
 /*** Fin zone ***/
-
 
 /*** score-zone ***/
 var ulPlayerlist = document.getElementById('playerlist');
@@ -44,13 +49,14 @@ var ulMessages = document.getElementById('messages'),
 function sendMessage() {
 	var msg = input.value;
 	input.value = "";
-	/* TODO: send the msg to server */
-	displayMessage(null, msg);
+	socket.emit('msg', { msg: msg });
+	displayMessage("Me", msg);
 }
 
-function displayMessage(user, msg) {
+function displayMessage(name, msg) {
 	var li = document.createElement('li');
-	li.innerHTML = msg;
+	var username = '<span>' + name + ':</span>';
+	li.innerHTML = username + msg;
 	var lastMsg = ulMessages.firstChild;
 	ulMessages.insertBefore(li, lastMsg);
 }
@@ -133,50 +139,77 @@ for (var i in colors) {
 		onColorSelected(e.srcElement);
 	}
 }
-
 /** Fin Header **/
 
 
 /** Canvas **/
 var canvas = document.getElementById('canvas'),
 	ctx = canvas.getContext('2d'),
-	lmousePressed = false;
+	lmousePressed = false,
+	fromX = 0, fromY = 0;
 
-// function startDrawing() {
-	canvas.onmousedown = function(e) {
-		e.preventDefault();
-		if (e.button == 0) {
-			lmousePressed = true;
-			ctx.beginPath();
-			ctx.moveTo(e.x-canvas.offsetLeft, e.y-canvas.offsetTop);
-		}
+function resetCanvas() {
+	ctx.clearRect ( 0, 0 , canvas.width, canvas.height );
+}
+
+
+canvas.onmousedown = function(e) {
+	e.preventDefault();
+	// if (!localuser.isDrawer) { return; }
+	if (e.button == 0) {
+		lmousePressed = true;
+		ctx.beginPath();
+		fromX = e.x-canvas.offsetLeft;
+		fromY = e.y-canvas.offsetTop;
+		// ctx.moveTo(e.x-canvas.offsetLeft, e.y-canvas.offsetTop);
 	}
+}
 
-	canvas.onmouseup = function(e) {
-		e.preventDefault();
-		if (e.button == 0) {
-			lmousePressed = false;
-		}
-	}
-
-	canvas.onmouseout = function(e) {
-		e.preventDefault();
+canvas.onmouseup = function(e) {
+	e.preventDefault();
+	// if (!localuser.isDrawer) { return; }
+	if (e.button == 0) {
 		lmousePressed = false;
 	}
+}
 
-	canvas.onmousemove = function(e) {
-		e.preventDefault();
-		if (lmousePressed) {
-			var x = e.x-canvas.offsetLeft, y = e.y-canvas.offsetTop
-			ctx.lineWidth = getSelectedSize();
-			ctx.strokeStyle = getSelectedColor();
-			ctx.lineJoin = "round";
-			ctx.lineCap = "round";
-			ctx.lineTo(x, y);
-			ctx.stroke();
-		}
+canvas.onmouseout = function(e) {
+	e.preventDefault();
+	// if (!localuser.isDrawer) { return; }
+	lmousePressed = false;
+}
+
+canvas.onmousemove = function(e) {
+	e.preventDefault();
+	// if (!localuser.isDrawer) { return; }
+	if (lmousePressed /*&& localuser.isDrawer*/) {
+		var toX = e.x-canvas.offsetLeft,
+			toY = e.y-canvas.offsetTop,
+			size = getSelectedSize(),
+			color = getSelectedColor();
+		socket.emit('draw', { 
+			fx: fromX, 
+			fy: fromY,
+			tx: toX,
+			ty: toY,
+			size: size,
+			color: color}
+		);
+		paint(fromX, fromY, toX, toY, size, color);
+		fromX = toX;
+		fromY = toY;
 	}
-// }
+}
+
+function paint(fx, fy, tx, ty, size, color){
+	ctx.lineWidth = size;
+	ctx.strokeStyle = color;
+	ctx.lineJoin = "round";
+	ctx.lineCap = "round";
+	ctx.moveTo(fx, fy);
+	ctx.lineTo(tx, ty);
+	ctx.stroke();
+}
 
 function getSelectedSize() {
 	if (selectedSize != undefined) {
@@ -221,5 +254,53 @@ function getSelectedColor() {
 	return "#000000";
 }
 /** Fin Canvas **/
-
 /*** Fin zone ***/
+
+
+// function ready() {
+	// socket.emit('join', { roomid: roomid });
+// }
+
+/* ==== SOCKET IO ==== */
+var players = {};
+
+// document.onload = function () {
+	// console.log("loaded");
+	var socket = io.connect('pic.supgame.com');
+	// console.log(socket);
+
+	socket.emit('join', { roomid: roomid });
+
+	socket.on('join', function (data) {
+		console.log(data);
+		var userId = '';
+
+		players[player.id] = player;
+	});
+
+	socket.on('disconnect', function (data) {
+		console.log(data);
+		var playerId = '';
+		delete players[playerId];
+	});
+
+	socket.on('msg', function (data) {
+		console.log('msg');
+		console.log(data);
+		var name = data.user,
+			msg = data.msg;
+		displayMessage(name, msg);
+	});
+
+	socket.on('draw', function (data) {
+		console.log(data);
+		var fromX = data.fx,
+			fromY = data.fy,
+			toX = data.tx,
+			toY = data.ty,
+			size = data.size,
+			color = data.color;
+		paint(fromX, fromY, toX, toY, size, color);
+	});
+// };
+/* =================== */

@@ -2,6 +2,96 @@
 ****** ROOMS ******
 ******************/
 
-#roomsbrowser {
-	
+#roombrowser {
+
+}
+
+#roombrowser form{
+	text-align: center;
+	margin: 10px;
+}
+
+#roombrowser table {
+	width: 800px;
+	margin: auto;
+	box-shadow: 0px 0px 5px #000000;
+}
+
+#roombrowser .col-num,
+#roombrowser .col-room,
+#roombrowser .col-players {
+	line-height: 30px;
+}
+
+#roombrowser .col-num {
+	width: 2%;
+	text-align: center;
+}
+
+#roombrowser .col-flag {
+	width: 8%;
+	text-align: center;
+}
+
+#roombrowser .col-room {
+	width: 50%;
+}
+
+#roombrowser .col-players {
+	width: 10%;
+	text-align: center;
+}
+
+#roombrowser .col-connect {
+	width: 10%;
+	text-align: center;
+}
+
+td.fr {
+	margin: 5px;
+	background: url('/images/flags/fr.png') no-repeat center;
+}
+
+td.en {
+	margin: 5px;
+	background: url('/images/flags/en.png') no-repeat center;
+}
+
+td.de {
+	margin: 5px;
+	background: url('/images/flags/de.png') no-repeat center;
+}
+
+td.es {
+	margin: 5px;
+	line-height: 30px;
+	background: url('/images/flags/sp-pr.png') no-repeat center;
+}
+
+#roombrowser table tbody td button {
+	color: #fff;
+	background-color: #5cb85c;
+	border-color: #4cae4c;
+	display: inline-block;
+	padding: 5px 10px;
+	margin-bottom: 0;
+	font-family: inherit;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 1.5;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	cursor: pointer;
+	-webkit-appearance: button;
+	line-height: 1.5;
 }

@@ -7,8 +7,7 @@ var mongoose = require('./getMongoose.js').mongoose,
 			unique: true
 		},
 		password: {
-			type: String,
-			unique: true
+			type: String
 		},
 		language: {
 			type: String,

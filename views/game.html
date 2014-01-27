@@ -6,23 +6,24 @@
 	<div id="game-zone">
 		<div id="side-zone" >
 			<div id="time-zone">
-				<span id="time">2:30</span>
+				<span id="time">0:00</span>
+				<div id="uready">
+					<!-- <button class="btn btn-success" onclick="ready()">I'm ready</button> -->
+				</div>
 			</div>
 			<div id="score-zone" class="top-border">
 				<ul id="playerlist">
-					<li><span>tehCivilian:</span>3 points</li>
-					<li class="drawer"><span>tehCivilian:</span>3 points</li>
-					<li><span>tehCivilian:</span>3 points</li>
-					<li><span>tehCivilian:</span>3 points</li>
+					{% for i, player in room.players %}
+						<li><span>{{ player.nickname }}:</span>0 points</li>
+					{% endfor %}
+					<!-- hardcoded -->
+					<li class="drawer"><span>civilian:</span>0 points</li>
+					<li><span>shep:</span>0 points</li>
+
 				</ul>
 			</div>
 			<div id="chat-zone" class="top-border">
-				<ul id="messages">
-					<li><span>tehCivilian:</span>Putin mais tu dessines comme une merde sérieux !</li>
-					<li><span>tehCivilian:</span>Ferme ta gueule, tu t'es pas vu déssiner ! lol</li>
-					<li><span>tehCivilian:</span>lol</li>
-					<li><span>tehCivilian:</span>lol</li>
-				</ul>
+				<ul id="messages"></ul>
 				<form id="chat-input" onsubmit="sendMessage();return false">
 						<input id="inputmsg" class="form-control" type="text">
 						<button type="submit" class="btn btn-default">Send</button>
@@ -57,8 +58,9 @@
 					<li id="pink"></li>
 				</ul>
 			</div>
-			<canvas id="canvas" width="560", height="500"></canvas>
+			<canvas id="canvas" width="560" height="500"></canvas>
 		</div>
 		<div class="clearfix"></div>
+	<script src="/socket.io/socket.io.js"></script>
 	<script src="/javascripts/game.js"></script>
 {% endblock %}
